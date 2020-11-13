@@ -3,7 +3,7 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Header from './Header';
 import Login from './Login';
-import { projectAuth } from './firebase';
+import { projectAuth, projectFirestore, timestamp } from './firebase';
 import { User } from './Types/User';
 import Contact from './Contact';
 // Statics
@@ -14,13 +14,23 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    projectAuth.onAuthStateChanged((authUser) => {
+    projectAuth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
         const user: User = {
           email: authUser.email,
           username: authUser.displayName,
         };
         setUser(user);
+        const DB_REF = projectFirestore.collection(user.email!);
+        if (DB_REF && !DB_REF.doc()) {
+          await DB_REF.add({
+            email: user.email,
+            username: user.username || '',
+            image_url: '',
+            ph_number: 0,
+            createdAt: timestamp,
+          });
+        }
         history.push('/contacts');
       } else {
         setUser(null);
