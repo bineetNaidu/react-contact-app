@@ -4,8 +4,11 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Button from '@material-ui/core/Button';
+import { User } from './Types/User';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { projectAuth } from './firebase';
 
-const Header: React.FC = () => {
+const Header: React.FC<{ user: User | null }> = ({ user }) => {
   return (
     <div className="header">
       <Link to="/" className="header__brand">
@@ -14,15 +17,31 @@ const Header: React.FC = () => {
       </Link>
 
       <div className="header__ctx">
-        <Link to="/login">
-          <Button
-            variant="outlined"
-            color="primary"
-            endIcon={<PersonAddIcon />}
-          >
-            Login
-          </Button>
-        </Link>
+        {user ? (
+          <>
+            <Button variant="outlined" color="primary">
+              {user.username ? user.username : user.email}
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              endIcon={<ExitToAppIcon />}
+              onClick={() => projectAuth.signOut()}
+            >
+              Logout
+            </Button>
+          </>
+        ) : (
+          <Link to="/login">
+            <Button
+              variant="outlined"
+              color="primary"
+              endIcon={<PersonAddIcon />}
+            >
+              Login
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );
