@@ -45,19 +45,36 @@ const App: React.FC = () => {
     <div className="app">
       <Header user={user} />
       <Switch>
-        <AnimatePresence>
-          <Route exact path="/login" component={Login} />
+        <AnimatePresence exitBeforeEnter>
+          <Route
+            exact
+            path="/login"
+            component={Login}
+            key={history.location.key}
+          />
           {user ? (
             <>
               <Route
                 exact
                 path="/contacts"
-                render={() => <Contact user={user} docId={docId} />}
+                render={() => (
+                  <Contact
+                    user={user}
+                    docId={docId}
+                    key={history.location.key}
+                  />
+                )}
               />
               <Route
                 exact
                 path="/contacts/new"
-                render={() => <ContactNew user={user} docId={docId} />}
+                render={() => (
+                  <ContactNew
+                    user={user}
+                    key={history.location.key}
+                    docId={docId}
+                  />
+                )}
               />
             </>
           ) : (

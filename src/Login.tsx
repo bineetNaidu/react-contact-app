@@ -3,7 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { projectAuth } from './firebase';
 import { useHistory } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import './Login.css';
+import { containerVariants } from './variants';
 
 const Login: React.FC = () => {
   const history = useHistory();
@@ -28,12 +30,16 @@ const Login: React.FC = () => {
   };
 
   return (
-    <form
+    <motion.form
       className="login"
       onSubmit={(e) => {
         e.preventDefault();
         handleSignEmailAndPassword(email, password);
       }}
+      variants={containerVariants}
+      initial="hidden"
+      exit="exit"
+      animate="visible"
     >
       <h1>Login</h1>
       <TextField
@@ -55,7 +61,7 @@ const Login: React.FC = () => {
       <Button variant="contained" color="primary" type="submit">
         Login
       </Button>
-    </form>
+    </motion.form>
   );
 };
 

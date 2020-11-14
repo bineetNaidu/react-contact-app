@@ -7,6 +7,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import './ContactNew.css';
 import { useHistory } from 'react-router-dom';
 import { projectFirestore, timestamp } from './firebase';
+import { motion } from 'framer-motion';
+import { containerVariants } from './variants';
 
 interface Props {
   user: User;
@@ -43,7 +45,14 @@ const ContactNew: React.FC<Props> = ({ user, docId }) => {
   };
 
   return (
-    <form className="contactNew" onSubmit={handleCreate}>
+    <motion.form
+      className="contactNew"
+      onSubmit={handleCreate}
+      variants={containerVariants}
+      initial="hidden"
+      exit="exit"
+      animate="visible"
+    >
       <h2>Create new Contact</h2>
       <TextField
         label="Username"
@@ -79,7 +88,7 @@ const ContactNew: React.FC<Props> = ({ user, docId }) => {
           labelPlacement="end"
         />
       </div>
-    </form>
+    </motion.form>
   );
 };
 

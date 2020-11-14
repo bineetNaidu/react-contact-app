@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useFirestore from './hooks/useFirestore';
 import { User } from './Types/User';
-import List from '@material-ui/core/List';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import ContactListItem from './ContactListItem';
 import './Contact.css';
+import { motion } from 'framer-motion';
+import { containerVariants } from './variants';
 
 interface Props {
   user: User;
@@ -24,14 +25,19 @@ const Contact: React.FC<Props> = ({ user, docId }) => {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <div className="contact">
+    <motion.div
+      className="contact"
+      variants={containerVariants}
+      initial="hidden"
+      exit="exit"
+      animate="visible"
+    >
       <Link to="/contacts/new" className="contact__floatingCtx">
         <Fab color="primary" aria-label="Create a new Contact">
           <AddIcon />
         </Fab>
       </Link>
-
-      <List dense className="contact__lists">
+      <motion.div layout className="contact__lists">
         {docs.map((c) => (
           <ContactListItem
             {...c}
@@ -39,8 +45,8 @@ const Contact: React.FC<Props> = ({ user, docId }) => {
             handleChange={handleChange}
           />
         ))}
-      </List>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
