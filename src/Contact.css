@@ -1,0 +1,33 @@
+.contact__floatingCtx {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.contact__lists {
+  max-width: 600px;
+  margin: auto !important;
+}
+
+.contact__secondaryHeading {
+  font-size: 15px;
+  color: rgb(157, 151, 151);
+  display: flex;
+  align-items: center;
+  padding-left: 4%;
+}
+
+.contact__metaData {
+  padding: 0 50px;
+}
+
+.contact__metaData--center {
+  border-right: 2px solid lightblue;
+  border-left: 2px solid lightblue;
+}
+
+.contact__details {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
