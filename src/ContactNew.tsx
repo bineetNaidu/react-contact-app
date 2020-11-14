@@ -32,7 +32,7 @@ const ContactNew: React.FC<Props> = ({ user, docId }) => {
           ph_number: phNum,
           username,
           isFavourite: isFav,
-          createAt: timestamp,
+          createdAt: timestamp,
         })
         .then(() => {
           history.push('/contacts');

@@ -6,6 +6,6 @@ export type Contact = {
   email: string;
   ph_number: number;
   username: string;
-  createAt: Date;
+  createdAt: Date;
   contact?: MetaContact;
 };

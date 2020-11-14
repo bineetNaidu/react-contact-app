@@ -5,7 +5,7 @@ import { Contact } from '../Types/CotactsTypes';
 // takes a collection name
 const useFirestore = (collection: string, docId: string) => {
   // STATES
-  const [docs, setDocs] = useState<Contact[] | []>([]);
+  const [docs, setDocs] = useState<Array<Contact>>([]);
 
   // HOOKS
   useEffect(() => {
@@ -15,7 +15,7 @@ const useFirestore = (collection: string, docId: string) => {
       .collection('contacts')
       .orderBy('createdAt', 'desc')
       .onSnapshot((snaps) => {
-        let documents: any[] = [];
+        let documents: any = [];
         snaps.forEach((doc) => documents.push({ ...doc.data(), id: doc.id }));
         setDocs(documents);
       });

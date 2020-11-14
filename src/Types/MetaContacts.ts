@@ -4,5 +4,5 @@ export type MetaContact = {
   ph_number: number | string;
   username: string;
   isFavourite: boolean;
-  createAt: Date;
+  createdAt: Date;
 };
