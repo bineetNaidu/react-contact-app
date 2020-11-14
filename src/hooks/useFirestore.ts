@@ -21,7 +21,7 @@ const useFirestore = (collection: string, docId: string) => {
       });
 
     return () => unsubscribe();
-  }, [collection]);
+  }, [collection, docId]);
 
   return { docs };
 };
