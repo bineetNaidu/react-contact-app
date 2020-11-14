@@ -6,12 +6,14 @@ import Login from './Login';
 import { projectAuth, projectFirestore, timestamp } from './firebase';
 import { User } from './Types/User';
 import Contact from './Contact';
+import ContactNew from './ContactNew';
 // Statics
 import './App.css';
 
 const App: React.FC = () => {
   const history = useHistory();
   const [user, setUser] = useState<User | null>(null);
+  const [docId, setDocId] = useState('');
 
   useEffect(() => {
     projectAuth.onAuthStateChanged(async (authUser) => {
@@ -31,6 +33,7 @@ const App: React.FC = () => {
             createdAt: timestamp,
           });
         }
+        DB_REF.onSnapshot((snap) => setDocId(snap.docs[0].id));
         history.push('/contacts');
       } else {
         setUser(null);
@@ -46,7 +49,16 @@ const App: React.FC = () => {
           <Route exact path="/login" component={Login} />
           {user ? (
             <>
-              <Route exact path="/contacts" component={Contact} />
+              <Route
+                exact
+                path="/contacts"
+                render={() => <Contact user={user} docId={docId} />}
+              />
+              <Route
+                exact
+                path="/contacts/new"
+                render={() => <ContactNew user={user} docId={docId} />}
+              />
             </>
           ) : (
             <Redirect to="/login" />
