@@ -34,7 +34,7 @@ const App: React.FC = () => {
           });
         }
         DB_REF.onSnapshot((snap) => setDocId(snap.docs[0].id));
-        history.push('/contacts');
+        // history.push('/contacts');
       } else {
         setUser(null);
       }

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { projectFirestore } from '../firebase';
-import { Contact } from '../Types/CotactsTypes';
+import { MetaContact } from '../Types/MetaContacts';
 
 // takes a collection name
 const useFirestore = (collection: string, docId: string) => {
   // STATES
-  const [docs, setDocs] = useState<Array<Contact>>([]);
+  const [docs, setDocs] = useState<Array<MetaContact>>([]);
 
   // HOOKS
   useEffect(() => {
