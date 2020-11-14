@@ -19,9 +19,11 @@ const Header: React.FC<{ user: User | null }> = ({ user }) => {
       <div className="header__ctx">
         {user ? (
           <>
-            <Button variant="outlined" color="primary">
-              {user.username ? user.username : user.email}
-            </Button>
+            <Link to="/contacts">
+              <Button variant="outlined" color="primary">
+                {user.username ? user.username : user.email}
+              </Button>
+            </Link>
             <Button
               variant="outlined"
               color="primary"
